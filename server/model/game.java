@@ -1,5 +1,6 @@
 package model;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 public class game {
@@ -84,7 +85,7 @@ public class game {
         if (this.grelhas[0].checkStatus() == false) {
             this.winner = 2;
             System.out.println("Player 1 died RIP");
-        } else if (this.grelhas[0].checkStatus() == false) {
+        } else if (this.grelhas[1].checkStatus() == false) {
             this.winner = 1;
             System.out.println("Player 2 died RIP");
         }
@@ -92,8 +93,27 @@ public class game {
 
     public void print() {
         for (int i = 0; i < 10; i++) {
-            System.out.println(this.grelhas[0].getLinha(i) + "                   " + this.grelhas[0].getLinha(i));
+            System.out.println(this.grelhas[0].getLinha(i) + "                   " + this.grelhas[1].getLinha(i));
         }
     }
 
+    public ArrayList<String> getLines(int player) {
+        ArrayList<String> lines= new ArrayList<>();
+        if(player==1){
+            lines.add("     Player 1                                 Player 2    ");
+        }
+        else{
+            lines.add("     Player 2                                 Player 1    ");
+        }
+
+        for (int i = 0; i < 10; i++) {
+            if(player==1){
+            lines.add(this.grelhas[0].getLinha(player-1,0,i) + "                   " + this.grelhas[1].getLinha(player-1,1,i));
+            }
+            else{
+                lines.add(this.grelhas[1].getLinha(player-1,1,i) + "                   " + this.grelhas[0].getLinha(player-1,0,i));
+                }
+        }
+        return lines;
+    }
 }

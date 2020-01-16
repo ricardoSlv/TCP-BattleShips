@@ -45,7 +45,7 @@ public class grelha {
 
         for (var i = 0; i < this.size; i++) {
             for (var j = 0; j < this.size; j++) {
-                if (this.matrix[i][j] > 0) {return true;}
+                if (this.matrix[i][j]!=100&&this.matrix[i][j] > 0) {return true;}
             }
         }
         return false;
@@ -68,7 +68,23 @@ public class grelha {
         
         for (int i = 0; i < this.size; i++){
             value=this.matrix[linha][i];
-            if(value==100){sb.append("N ");}
+            if(value<0){sb.append("X ");}
+            else if(value==100){sb.append("N ");}
+            else{sb.append(value+" ");}
+        }
+        
+        return sb.toString();    
+    }
+
+    public String getLinha(int player,int grelha,int linha){
+        StringBuilder sb= new StringBuilder();
+        int value=0;
+        
+        for (int i = 0; i < this.size; i++){
+            value=this.matrix[linha][i];
+            if(value<0){sb.append("X ");}
+            else if(value>0&&value<=8&&player!=grelha){sb.append("N ");}
+            else if(value==100){sb.append("N ");}
             else{sb.append(value+" ");}
         }
         
